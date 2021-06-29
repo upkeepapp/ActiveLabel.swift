@@ -16,6 +16,7 @@ struct RegexParser {
     static let urlPattern = "(^|[\\s.:;?\\-\\]<\\(])" +
         "((https?://|www\\.|pic\\.)[-\\w;/?:@&=+$\\|\\_.!~*\\|'()\\[\\]%#,☺]+[\\w/#](\\(\\))?)" +
     "(?=$|[\\s',\\|\\(\\).:;?\\-\\[\\]>\\)])"
+    static let phonePattern = "phone"
 
     private static var cachedRegularExpressions: [String : NSRegularExpression] = [:]
 
@@ -27,6 +28,9 @@ struct RegexParser {
     private static func regularExpression(for pattern: String) -> NSRegularExpression? {
         if let regex = cachedRegularExpressions[pattern] {
             return regex
+        } else if pattern == phonePattern {
+            let types: NSTextCheckingResult.CheckingType = [.phoneNumber]
+            return try? NSDataDetector(types: types.rawValue)
         } else if let createdRegex = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive]) {
             cachedRegularExpressions[pattern] = createdRegex
             return createdRegex

@@ -45,6 +45,12 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     @IBInspectable open var URLSelectedColor: UIColor? {
         didSet { updateTextStorage(parseText: false) }
     }
+    @IBInspectable public var phoneColor: UIColor = .blue {
+        didSet { updateTextStorage(parseText: false) }
+    }
+    @IBInspectable public var phoneSelectedColor: UIColor? {
+        didSet { updateTextStorage(parseText: false) }
+    }
     open var customColor: [ActiveType : UIColor] = [:] {
         didSet { updateTextStorage(parseText: false) }
     }
@@ -63,7 +69,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     public var highlightFontSize: CGFloat? = nil {
         didSet { updateTextStorage(parseText: false) }
     }
-    
+
     // MARK: - Computed Properties
     private var hightlightFont: UIFont? {
         guard let highlightFontName = highlightFontName, let highlightFontSize = highlightFontSize else { return nil }
@@ -91,6 +97,10 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         emailTapHandler = handler
     }
     
+    open func handlePhoneTap(handler: @escaping (String) -> ()) {
+        phoneTapHandler = handler
+    }
+    
     open func removeHandle(for type: ActiveType) {
         switch type {
         case .hashtag:
@@ -103,6 +113,8 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             customTapHandlers[type] = nil
         case .email:
             emailTapHandler = nil
+        case .phone:
+            phoneTapHandler = nil
         }
     }
     
@@ -223,6 +235,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .url(let originalURL, _): didTapStringURL(originalURL)
             case .custom(let element): didTap(element, for: selectedElement.type)
             case .email(let element): didTapStringEmail(element)
+            case .phone(let phoneText): didTapPhone(phoneText)
             }
             
             let when = DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
@@ -251,6 +264,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     internal var hashtagTapHandler: ((String) -> ())?
     internal var urlTapHandler: ((URL) -> ())?
     internal var emailTapHandler: ((String) -> ())?
+    internal var phoneTapHandler: ((String) -> ())?
     internal var customTapHandlers: [ActiveType : ((String) -> ())] = [:]
     
     fileprivate var mentionFilterPredicate: ((String) -> Bool)?
@@ -333,6 +347,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .url: attributes[NSAttributedString.Key.foregroundColor] = URLColor
             case .custom: attributes[NSAttributedString.Key.foregroundColor] = customColor[type] ?? defaultCustomColor
             case .email: attributes[NSAttributedString.Key.foregroundColor] = URLColor
+            case .phone: attributes[NSAttributedString.Key.foregroundColor] = phoneColor
             }
             
             if let highlightFont = hightlightFont {
@@ -416,6 +431,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
                 let possibleSelectedColor = customSelectedColor[selectedElement.type] ?? customColor[selectedElement.type]
                 selectedColor = possibleSelectedColor ?? defaultCustomColor
             case .email: selectedColor = URLSelectedColor ?? URLColor
+            case .phone: selectedColor = phoneSelectedColor ?? phoneColor
             }
             attributes[NSAttributedString.Key.foregroundColor] = selectedColor
         } else {
@@ -426,6 +442,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .url: unselectedColor = URLColor
             case .custom: unselectedColor = customColor[selectedElement.type] ?? defaultCustomColor
             case .email: unselectedColor = URLColor
+            case .phone: unselectedColor = phoneColor
             }
             attributes[NSAttributedString.Key.foregroundColor] = unselectedColor
         }
@@ -523,6 +540,14 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             return
         }
         emailHandler(stringEmail)
+    }
+    
+    fileprivate func didTapPhone(_ phoneText: String) {
+        guard let phoneTapHandler = phoneTapHandler else {
+            delegate?.didSelect(phoneText, type: .phone)
+            return
+        }
+        phoneTapHandler(phoneText)
     }
     
     fileprivate func didTap(_ element: String, for type: ActiveType) {

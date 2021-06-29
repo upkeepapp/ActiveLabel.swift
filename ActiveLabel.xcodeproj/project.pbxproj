@@ -22,6 +22,8 @@
 		C1E867D61C3D7AEA00FD687A /* RegexParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E867D51C3D7AEA00FD687A /* RegexParser.swift */; };
 		E267FA251DB3A34900EEAC4C /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0249A21B9989B1005D8035 /* ActiveLabel.framework */; };
 		E267FA261DB3A34900EEAC4C /* ActiveLabel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0249A21B9989B1005D8035 /* ActiveLabel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FFACB85E268BBCB3002639FE /* PhoneParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB85D268BBCB3002639FE /* PhoneParsingTests.swift */; };
+		FFACB862268BD641002639FE /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB861268BD641002639FE /* BaseTestCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		C1D15C781D7C9B610041D119 /* StringTrimExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTrimExtension.swift; sourceTree = "<group>"; };
 		C1D15C7A1D7C9B7E0041D119 /* ActiveBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveBuilder.swift; sourceTree = "<group>"; };
 		C1E867D51C3D7AEA00FD687A /* RegexParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexParser.swift; sourceTree = "<group>"; };
+		FFACB85D268BBCB3002639FE /* PhoneParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneParsingTests.swift; sourceTree = "<group>"; };
+		FFACB861268BD641002639FE /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +146,8 @@
 			children = (
 				8F0249B11B9989B1005D8035 /* ActiveTypeTests.swift */,
 				8F0249B31B9989B1005D8035 /* Info.plist */,
+				FFACB85D268BBCB3002639FE /* PhoneParsingTests.swift */,
+				FFACB861268BD641002639FE /* BaseTestCase.swift */,
 			);
 			path = ActiveLabelTests;
 			sourceTree = "<group>";
@@ -318,6 +324,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F0249B21B9989B1005D8035 /* ActiveTypeTests.swift in Sources */,
+				FFACB862268BD641002639FE /* BaseTestCase.swift in Sources */,
+				FFACB85E268BBCB3002639FE /* PhoneParsingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
