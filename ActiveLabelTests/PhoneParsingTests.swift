@@ -10,6 +10,7 @@ import XCTest
 @testable import ActiveLabel
 
 final class PhoneParsingTests: BaseTestCase {
+    // MARK: - BEGIN Parsing
     func testItShouldNotRecognizeAnyPhoneNumbersInTextWithoutPhoneNumbers() {
         // given
         label.enabledTypes = [.phone]
@@ -68,11 +69,17 @@ final class PhoneParsingTests: BaseTestCase {
         XCTAssertEqual(activeElements(perType: .email("")).count, 1)
         XCTAssertEqual(activeElements(perType: .phone("")).count, 2)
     }
-    
-    // TODO: it should perform better then the old implementation
-    
-    // TODO: add tap handling tests
-    // TODO: add date parser
-}
+    // MARK: END Parsing -
 
-//label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 202-555-0123 ullamco laboris nisi ut aliquip ex ea commodo consequat. +1-202-555-0116 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    // MARK: - BEGIN Handler Removal
+    func testItRemovesPhoneHandlerClosure() {
+        // given
+        label.handlePhoneTap(handler: {_ in })
+        XCTAssertNotNil(label.handlePhoneTap)
+        // when
+        label.removeHandle(for: .phone)
+        // then
+        XCTAssertNil(label.phoneTapHandler)
+    }
+    // MARK: END Handler Removal -
+}
