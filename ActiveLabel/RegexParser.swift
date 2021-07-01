@@ -18,6 +18,7 @@ struct RegexParser {
     "(?=$|[\\s',\\|\\(\\).:;?\\-\\[\\]>\\)])"
     static let phonePattern = "phone"
     static let addressPattern = "address"
+    static let datePattern = "date"
 
     private static var cachedRegularExpressions: [String : NSRegularExpression] = [:]
 
@@ -35,6 +36,9 @@ struct RegexParser {
             return try? NSDataDetector(types: types.rawValue)
         } else if pattern == addressPattern {
             let types: NSTextCheckingResult.CheckingType = [.address]
+            return try? NSDataDetector(types: types.rawValue)
+        } else if pattern == datePattern {
+            let types: NSTextCheckingResult.CheckingType = [.date]
             return try? NSDataDetector(types: types.rawValue)
         } else if let createdRegex = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive]) {
             cachedRegularExpressions[pattern] = createdRegex

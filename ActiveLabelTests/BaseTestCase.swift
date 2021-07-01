@@ -18,6 +18,8 @@ public func ==(a: ActiveElement, b: ActiveElement) -> Bool {
     case (.url(let a), .url(let b)) where a == b: return true
     case (.custom(let a), .custom(let b)) where a == b: return true
     case (.phone(let a), .phone(let b)) where a == b: return true
+    case (.address(let a), .address(let b)) where a == b: return true
+    case (.date(let a), .date(let b)) where a == b: return true
     default: return false
     }
 }
@@ -40,6 +42,7 @@ class BaseTestCase: XCTestCase {
         case .email(let element): return element
         case .phone(let element): return element
         case .address(let element): return element
+        case .date(let element): return element
         }
     }
     
@@ -53,6 +56,7 @@ class BaseTestCase: XCTestCase {
         case .email: return .email
         case .phone: return .phone
         case .address: return .address
+        case .date: return .date
         }
     }
     
@@ -70,6 +74,8 @@ class BaseTestCase: XCTestCase {
             case (.hashtag(_), .hashtag(_)):
                 return true
             case (.address(_), .address(_)):
+                return true
+            case (.date(_), .date(_)):
                 return true
             case (.custom(_), .custom(_)):
                 return true

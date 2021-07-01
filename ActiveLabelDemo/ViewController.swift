@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         label.enabledTypes.append(customType3)
         label.enabledTypes.append(.phone)
         label.enabledTypes.append(.address)
+        label.enabledTypes.append(.date)
 
         label.urlMaximumLength = 31
 
@@ -33,7 +34,8 @@ class ViewController: UIViewController {
             " this one: http://optonaut.co. Now it also supports custom patterns -> are\n\n" +
                 "Let's trim a long link: \nhttps://twitter.com/twicket_app/status/649678392372121601" +
                 "\nPlus it has phone number +1-202-555-0116 support now" +
-                "\n Address support: 123 Some Awesome St., Katy, TX 12345"
+                "\n Address support: 123 Some Awesome St., Katy, TX 12345" +
+                "\n Date support: June 30th, 2021"
             label.numberOfLines = 0
             label.lineSpacing = 4
             
@@ -50,6 +52,7 @@ class ViewController: UIViewController {
             label.handleURLTap { self.alert("URL", message: $0.absoluteString) }
             label.handlePhoneTap { self.alert("Phone", message: $0) }
             label.handleAddressTap { self.alert("Address", message: $0) }
+            label.handleDateTap { self.alert("Date", message: $0) }
 
             //Custom types
 

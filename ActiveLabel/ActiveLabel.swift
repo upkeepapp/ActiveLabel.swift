@@ -60,6 +60,13 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         didSet { updateTextStorage(parseText: false) }
     }
     
+    @IBInspectable public var dateColor: UIColor = .blue {
+        didSet { updateTextStorage(parseText: false) }
+    }
+    @IBInspectable public var dateSelectedColor: UIColor? {
+        didSet { updateTextStorage(parseText: false) }
+    }
+
     open var customColor: [ActiveType : UIColor] = [:] {
         didSet { updateTextStorage(parseText: false) }
     }
@@ -114,6 +121,10 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         addressTapHandler = handler
     }
     
+    open func handleDateTap(handler: @escaping (String) -> ()) {
+        dateTapHandler = handler
+    }
+    
     open func removeHandle(for type: ActiveType) {
         switch type {
         case .hashtag:
@@ -130,6 +141,8 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             phoneTapHandler = nil
         case .address:
             addressTapHandler = nil
+        case .date:
+            dateTapHandler = nil
         }
     }
     
@@ -252,6 +265,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .email(let element): didTapStringEmail(element)
             case .phone(let phoneText): didTapPhone(phoneText)
             case .address(let addressText): didTapAddress(addressText)
+            case .date(let dateText): didTapAddress(dateText)
             }
             
             let when = DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
@@ -282,6 +296,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     internal var emailTapHandler: ((String) -> ())?
     internal var phoneTapHandler: ((String) -> ())?
     internal var addressTapHandler: ((String) -> ())?
+    internal var dateTapHandler: ((String) -> ())?
     internal var customTapHandlers: [ActiveType : ((String) -> ())] = [:]
     
     fileprivate var mentionFilterPredicate: ((String) -> Bool)?
@@ -366,6 +381,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .email: attributes[NSAttributedString.Key.foregroundColor] = URLColor
             case .phone: attributes[NSAttributedString.Key.foregroundColor] = phoneColor
             case .address: attributes[NSAttributedString.Key.foregroundColor] = addressColor
+            case .date: attributes[NSAttributedString.Key.foregroundColor] = dateColor
             }
             
             if let highlightFont = hightlightFont {
@@ -451,6 +467,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .email: selectedColor = URLSelectedColor ?? URLColor
             case .phone: selectedColor = phoneSelectedColor ?? phoneColor
             case .address: selectedColor = addressSelectedColor ?? addressColor
+            case .date: selectedColor = dateSelectedColor ?? dateColor
             }
             attributes[NSAttributedString.Key.foregroundColor] = selectedColor
         } else {
@@ -463,6 +480,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .email: unselectedColor = URLColor
             case .phone: unselectedColor = phoneColor
             case .address: unselectedColor = addressColor
+            case .date: unselectedColor = dateColor
             }
             attributes[NSAttributedString.Key.foregroundColor] = unselectedColor
         }

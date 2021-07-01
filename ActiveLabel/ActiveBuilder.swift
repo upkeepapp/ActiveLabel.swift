@@ -16,7 +16,7 @@ struct ActiveBuilder {
         switch type {
         case .mention, .hashtag:
             return createElementsIgnoringFirstCharacter(from: text, for: type, range: range, filterPredicate: filterPredicate)
-        case .url, .email, .phone, .address:
+        case .url, .email, .phone, .address, .date:
             return createElements(from: text, for: type, range: range, filterPredicate: filterPredicate)
         case .custom:
             return createElements(from: text, for: type, range: range, minLength: 1, filterPredicate: filterPredicate)
