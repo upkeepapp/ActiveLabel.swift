@@ -24,6 +24,8 @@
 		E267FA261DB3A34900EEAC4C /* ActiveLabel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0249A21B9989B1005D8035 /* ActiveLabel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FFACB85E268BBCB3002639FE /* PhoneParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB85D268BBCB3002639FE /* PhoneParsingTests.swift */; };
 		FFACB862268BD641002639FE /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB861268BD641002639FE /* BaseTestCase.swift */; };
+		FFACB86E268BF308002639FE /* AddressParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB86D268BF308002639FE /* AddressParsingTests.swift */; };
+		FFACB872268BF495002639FE /* DateParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB871268BF495002639FE /* DateParsingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		C1E867D51C3D7AEA00FD687A /* RegexParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexParser.swift; sourceTree = "<group>"; };
 		FFACB85D268BBCB3002639FE /* PhoneParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneParsingTests.swift; sourceTree = "<group>"; };
 		FFACB861268BD641002639FE /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		FFACB86D268BF308002639FE /* AddressParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressParsingTests.swift; sourceTree = "<group>"; };
+		FFACB871268BF495002639FE /* DateParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParsingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,8 @@
 				8F0249B31B9989B1005D8035 /* Info.plist */,
 				FFACB85D268BBCB3002639FE /* PhoneParsingTests.swift */,
 				FFACB861268BD641002639FE /* BaseTestCase.swift */,
+				FFACB86D268BF308002639FE /* AddressParsingTests.swift */,
+				FFACB871268BF495002639FE /* DateParsingTests.swift */,
 			);
 			path = ActiveLabelTests;
 			sourceTree = "<group>";
@@ -324,6 +330,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F0249B21B9989B1005D8035 /* ActiveTypeTests.swift in Sources */,
+				FFACB86E268BF308002639FE /* AddressParsingTests.swift in Sources */,
+				FFACB872268BF495002639FE /* DateParsingTests.swift in Sources */,
 				FFACB862268BD641002639FE /* BaseTestCase.swift in Sources */,
 				FFACB85E268BBCB3002639FE /* PhoneParsingTests.swift in Sources */,
 			);

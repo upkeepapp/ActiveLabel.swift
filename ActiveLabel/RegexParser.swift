@@ -17,6 +17,7 @@ struct RegexParser {
         "((https?://|www\\.|pic\\.)[-\\w;/?:@&=+$\\|\\_.!~*\\|'()\\[\\]%#,☺]+[\\w/#](\\(\\))?)" +
     "(?=$|[\\s',\\|\\(\\).:;?\\-\\[\\]>\\)])"
     static let phonePattern = "phone"
+    static let addressPattern = "address"
 
     private static var cachedRegularExpressions: [String : NSRegularExpression] = [:]
 
@@ -28,8 +29,12 @@ struct RegexParser {
     private static func regularExpression(for pattern: String) -> NSRegularExpression? {
         if let regex = cachedRegularExpressions[pattern] {
             return regex
+        // TODO: rethink this, there is probably a way to just create one NSDataDetector for all the types
         } else if pattern == phonePattern {
             let types: NSTextCheckingResult.CheckingType = [.phoneNumber]
+            return try? NSDataDetector(types: types.rawValue)
+        } else if pattern == addressPattern {
+            let types: NSTextCheckingResult.CheckingType = [.address]
             return try? NSDataDetector(types: types.rawValue)
         } else if let createdRegex = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive]) {
             cachedRegularExpressions[pattern] = createdRegex

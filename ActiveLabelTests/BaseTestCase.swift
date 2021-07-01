@@ -39,6 +39,7 @@ class BaseTestCase: XCTestCase {
         case .custom(let element): return element
         case .email(let element): return element
         case .phone(let element): return element
+        case .address(let element): return element
         }
     }
     
@@ -51,6 +52,7 @@ class BaseTestCase: XCTestCase {
         case .custom: return customEmptyType
         case .email: return .email
         case .phone: return .phone
+        case .address: return .address
         }
     }
     
@@ -66,6 +68,8 @@ class BaseTestCase: XCTestCase {
             case (.mention(_), .mention(_)):
                 return true
             case (.hashtag(_), .hashtag(_)):
+                return true
+            case (.address(_), .address(_)):
                 return true
             case (.custom(_), .custom(_)):
                 return true

@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         label.enabledTypes.append(customType2)
         label.enabledTypes.append(customType3)
         label.enabledTypes.append(.phone)
+        label.enabledTypes.append(.address)
 
         label.urlMaximumLength = 31
 
@@ -31,7 +32,8 @@ class ViewController: UIViewController {
             label.text = "This is a post with #multiple #hashtags and a @userhandle. Links are also supported like" +
             " this one: http://optonaut.co. Now it also supports custom patterns -> are\n\n" +
                 "Let's trim a long link: \nhttps://twitter.com/twicket_app/status/649678392372121601" +
-                "\nPlus it has phone number +1-202-555-0116 support now"
+                "\nPlus it has phone number +1-202-555-0116 support now" +
+                "\n Address support: 123 Some Awesome St., Katy, TX 12345"
             label.numberOfLines = 0
             label.lineSpacing = 4
             
@@ -47,6 +49,7 @@ class ViewController: UIViewController {
             label.handleHashtagTap { self.alert("Hashtag", message: $0) }
             label.handleURLTap { self.alert("URL", message: $0.absoluteString) }
             label.handlePhoneTap { self.alert("Phone", message: $0) }
+            label.handleAddressTap { self.alert("Address", message: $0) }
 
             //Custom types
 

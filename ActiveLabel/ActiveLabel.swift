@@ -45,12 +45,21 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     @IBInspectable open var URLSelectedColor: UIColor? {
         didSet { updateTextStorage(parseText: false) }
     }
+    
     @IBInspectable public var phoneColor: UIColor = .blue {
         didSet { updateTextStorage(parseText: false) }
     }
     @IBInspectable public var phoneSelectedColor: UIColor? {
         didSet { updateTextStorage(parseText: false) }
     }
+    
+    @IBInspectable public var addressColor: UIColor = .blue {
+        didSet { updateTextStorage(parseText: false) }
+    }
+    @IBInspectable public var addressSelectedColor: UIColor? {
+        didSet { updateTextStorage(parseText: false) }
+    }
+    
     open var customColor: [ActiveType : UIColor] = [:] {
         didSet { updateTextStorage(parseText: false) }
     }
@@ -101,6 +110,10 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         phoneTapHandler = handler
     }
     
+    open func handleAddressTap(handler: @escaping (String) -> ()) {
+        addressTapHandler = handler
+    }
+    
     open func removeHandle(for type: ActiveType) {
         switch type {
         case .hashtag:
@@ -115,6 +128,8 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             emailTapHandler = nil
         case .phone:
             phoneTapHandler = nil
+        case .address:
+            addressTapHandler = nil
         }
     }
     
@@ -236,6 +251,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .custom(let element): didTap(element, for: selectedElement.type)
             case .email(let element): didTapStringEmail(element)
             case .phone(let phoneText): didTapPhone(phoneText)
+            case .address(let addressText): didTapAddress(addressText)
             }
             
             let when = DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
@@ -265,6 +281,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     internal var urlTapHandler: ((URL) -> ())?
     internal var emailTapHandler: ((String) -> ())?
     internal var phoneTapHandler: ((String) -> ())?
+    internal var addressTapHandler: ((String) -> ())?
     internal var customTapHandlers: [ActiveType : ((String) -> ())] = [:]
     
     fileprivate var mentionFilterPredicate: ((String) -> Bool)?
@@ -348,6 +365,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .custom: attributes[NSAttributedString.Key.foregroundColor] = customColor[type] ?? defaultCustomColor
             case .email: attributes[NSAttributedString.Key.foregroundColor] = URLColor
             case .phone: attributes[NSAttributedString.Key.foregroundColor] = phoneColor
+            case .address: attributes[NSAttributedString.Key.foregroundColor] = addressColor
             }
             
             if let highlightFont = hightlightFont {
@@ -432,6 +450,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
                 selectedColor = possibleSelectedColor ?? defaultCustomColor
             case .email: selectedColor = URLSelectedColor ?? URLColor
             case .phone: selectedColor = phoneSelectedColor ?? phoneColor
+            case .address: selectedColor = addressSelectedColor ?? addressColor
             }
             attributes[NSAttributedString.Key.foregroundColor] = selectedColor
         } else {
@@ -443,6 +462,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .custom: unselectedColor = customColor[selectedElement.type] ?? defaultCustomColor
             case .email: unselectedColor = URLColor
             case .phone: unselectedColor = phoneColor
+            case .address: unselectedColor = addressColor
             }
             attributes[NSAttributedString.Key.foregroundColor] = unselectedColor
         }
@@ -548,6 +568,14 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             return
         }
         phoneTapHandler(phoneText)
+    }
+    
+    fileprivate func didTapAddress(_ addressText: String) {
+        guard let addressTapHandler = addressTapHandler else {
+            delegate?.didSelect(addressText, type: .phone)
+            return
+        }
+        addressTapHandler(addressText)
     }
     
     fileprivate func didTap(_ element: String, for type: ActiveType) {
