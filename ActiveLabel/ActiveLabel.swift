@@ -590,7 +590,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     
     fileprivate func didTapAddress(_ addressText: String) {
         guard let addressTapHandler = addressTapHandler else {
-            delegate?.didSelect(addressText, type: .phone)
+            delegate?.didSelect(addressText, type: .address)
             return
         }
         addressTapHandler(addressText)
