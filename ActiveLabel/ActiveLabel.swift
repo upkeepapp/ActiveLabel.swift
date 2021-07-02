@@ -265,7 +265,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .email(let element): didTapStringEmail(element)
             case .phone(let phoneText): didTapPhone(phoneText)
             case .address(let addressText): didTapAddress(addressText)
-            case .date(let dateText): didTapAddress(dateText)
+            case .date(let dateText): didTapDate(dateText)
             }
             
             let when = DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
@@ -595,6 +595,14 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         }
         addressTapHandler(addressText)
     }
+  
+  fileprivate func didTapDate(_ dateText: String) {
+      guard let dateTapHandler = dateTapHandler else {
+          delegate?.didSelect(dateText, type: .date)
+          return
+      }
+      dateTapHandler(dateText)
+  }
     
     fileprivate func didTap(_ element: String, for type: ActiveType) {
         guard let elementHandler = customTapHandlers[type] else {
