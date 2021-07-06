@@ -9,7 +9,7 @@
 import XCTest
 @testable import ActiveLabel
 
-final class DateParsingTests: BaseTestCase {
+final class DateParsingIntegrationTests: BaseIntegrationTestCase {
     // MARK: - BEGIN Parsing
     func testItShouldNotRecognizeAnyDatesInTextWithoutDates() {
         // given

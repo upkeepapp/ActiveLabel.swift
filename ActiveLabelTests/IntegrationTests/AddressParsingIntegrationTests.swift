@@ -9,7 +9,7 @@
 import XCTest
 @testable import ActiveLabel
 
-final class AddressParsingTests: BaseTestCase {
+final class AddressParsingIntegrationTests: BaseIntegrationTestCase {
 
     // MARK: - BEGIN Parsing
     func testItShouldNotRecognizeAnyAddressesInTextWithoutAddresses() {

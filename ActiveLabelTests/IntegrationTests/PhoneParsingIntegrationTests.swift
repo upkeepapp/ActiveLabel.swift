@@ -9,7 +9,7 @@
 import XCTest
 @testable import ActiveLabel
 
-final class PhoneParsingTests: BaseTestCase {
+final class PhoneParsingIntegrationTests: BaseIntegrationTestCase {
     // MARK: - BEGIN Parsing
     func testItShouldNotRecognizeAnyPhoneNumbersInTextWithoutPhoneNumbers() {
         // given

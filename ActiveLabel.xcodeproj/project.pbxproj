@@ -22,10 +22,13 @@
 		C1E867D61C3D7AEA00FD687A /* RegexParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E867D51C3D7AEA00FD687A /* RegexParser.swift */; };
 		E267FA251DB3A34900EEAC4C /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0249A21B9989B1005D8035 /* ActiveLabel.framework */; };
 		E267FA261DB3A34900EEAC4C /* ActiveLabel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0249A21B9989B1005D8035 /* ActiveLabel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FFACB85E268BBCB3002639FE /* PhoneParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB85D268BBCB3002639FE /* PhoneParsingTests.swift */; };
-		FFACB862268BD641002639FE /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB861268BD641002639FE /* BaseTestCase.swift */; };
-		FFACB86E268BF308002639FE /* AddressParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB86D268BF308002639FE /* AddressParsingTests.swift */; };
-		FFACB872268BF495002639FE /* DateParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB871268BF495002639FE /* DateParsingTests.swift */; };
+		FFACB85E268BBCB3002639FE /* PhoneParsingIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB85D268BBCB3002639FE /* PhoneParsingIntegrationTests.swift */; };
+		FFACB862268BD641002639FE /* BaseIntegrationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB861268BD641002639FE /* BaseIntegrationTestCase.swift */; };
+		FFACB86E268BF308002639FE /* AddressParsingIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB86D268BF308002639FE /* AddressParsingIntegrationTests.swift */; };
+		FFACB872268BF495002639FE /* DateParsingIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACB871268BF495002639FE /* DateParsingIntegrationTests.swift */; };
+		FFF0FEBD26950ED300AC7B37 /* ActiveElement+UnitTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF0FEBC26950ED300AC7B37 /* ActiveElement+UnitTestUtilities.swift */; };
+		FFF0FEC726950F5D00AC7B37 /* ActiveLabelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF0FEC626950F5D00AC7B37 /* ActiveLabelUnitTests.swift */; };
+		FFF0FECC269510E300AC7B37 /* MockActiveBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF0FECB269510E300AC7B37 /* MockActiveBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,10 +81,13 @@
 		C1D15C781D7C9B610041D119 /* StringTrimExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTrimExtension.swift; sourceTree = "<group>"; };
 		C1D15C7A1D7C9B7E0041D119 /* ActiveBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveBuilder.swift; sourceTree = "<group>"; };
 		C1E867D51C3D7AEA00FD687A /* RegexParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexParser.swift; sourceTree = "<group>"; };
-		FFACB85D268BBCB3002639FE /* PhoneParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneParsingTests.swift; sourceTree = "<group>"; };
-		FFACB861268BD641002639FE /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
-		FFACB86D268BF308002639FE /* AddressParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressParsingTests.swift; sourceTree = "<group>"; };
-		FFACB871268BF495002639FE /* DateParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParsingTests.swift; sourceTree = "<group>"; };
+		FFACB85D268BBCB3002639FE /* PhoneParsingIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneParsingIntegrationTests.swift; sourceTree = "<group>"; };
+		FFACB861268BD641002639FE /* BaseIntegrationTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseIntegrationTestCase.swift; sourceTree = "<group>"; };
+		FFACB86D268BF308002639FE /* AddressParsingIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressParsingIntegrationTests.swift; sourceTree = "<group>"; };
+		FFACB871268BF495002639FE /* DateParsingIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParsingIntegrationTests.swift; sourceTree = "<group>"; };
+		FFF0FEBC26950ED300AC7B37 /* ActiveElement+UnitTestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActiveElement+UnitTestUtilities.swift"; sourceTree = "<group>"; };
+		FFF0FEC626950F5D00AC7B37 /* ActiveLabelUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveLabelUnitTests.swift; sourceTree = "<group>"; };
+		FFF0FECB269510E300AC7B37 /* MockActiveBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockActiveBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,12 +154,11 @@
 		8F0249B01B9989B1005D8035 /* ActiveLabelTests */ = {
 			isa = PBXGroup;
 			children = (
-				8F0249B11B9989B1005D8035 /* ActiveTypeIntegrationTests.swift */,
+				FFF0FECA269510CF00AC7B37 /* Mocks */,
+				FFF0FEB126950E6700AC7B37 /* IntegrationTests */,
 				8F0249B31B9989B1005D8035 /* Info.plist */,
-				FFACB85D268BBCB3002639FE /* PhoneParsingTests.swift */,
-				FFACB861268BD641002639FE /* BaseTestCase.swift */,
-				FFACB86D268BF308002639FE /* AddressParsingTests.swift */,
-				FFACB871268BF495002639FE /* DateParsingTests.swift */,
+				FFF0FEBC26950ED300AC7B37 /* ActiveElement+UnitTestUtilities.swift */,
+				FFF0FEC626950F5D00AC7B37 /* ActiveLabelUnitTests.swift */,
 			);
 			path = ActiveLabelTests;
 			sourceTree = "<group>";
@@ -169,6 +174,26 @@
 				8F0249CE1B998A66005D8035 /* Info.plist */,
 			);
 			path = ActiveLabelDemo;
+			sourceTree = "<group>";
+		};
+		FFF0FEB126950E6700AC7B37 /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				FFACB861268BD641002639FE /* BaseIntegrationTestCase.swift */,
+				8F0249B11B9989B1005D8035 /* ActiveTypeIntegrationTests.swift */,
+				FFACB85D268BBCB3002639FE /* PhoneParsingIntegrationTests.swift */,
+				FFACB86D268BF308002639FE /* AddressParsingIntegrationTests.swift */,
+				FFACB871268BF495002639FE /* DateParsingIntegrationTests.swift */,
+			);
+			path = IntegrationTests;
+			sourceTree = "<group>";
+		};
+		FFF0FECA269510CF00AC7B37 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				FFF0FECB269510E300AC7B37 /* MockActiveBuilder.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,10 +355,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F0249B21B9989B1005D8035 /* ActiveTypeIntegrationTests.swift in Sources */,
-				FFACB86E268BF308002639FE /* AddressParsingTests.swift in Sources */,
-				FFACB872268BF495002639FE /* DateParsingTests.swift in Sources */,
-				FFACB862268BD641002639FE /* BaseTestCase.swift in Sources */,
-				FFACB85E268BBCB3002639FE /* PhoneParsingTests.swift in Sources */,
+				FFF0FEC726950F5D00AC7B37 /* ActiveLabelUnitTests.swift in Sources */,
+				FFACB86E268BF308002639FE /* AddressParsingIntegrationTests.swift in Sources */,
+				FFACB872268BF495002639FE /* DateParsingIntegrationTests.swift in Sources */,
+				FFF0FEBD26950ED300AC7B37 /* ActiveElement+UnitTestUtilities.swift in Sources */,
+				FFACB862268BD641002639FE /* BaseIntegrationTestCase.swift in Sources */,
+				FFACB85E268BBCB3002639FE /* PhoneParsingIntegrationTests.swift in Sources */,
+				FFF0FECC269510E300AC7B37 /* MockActiveBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
