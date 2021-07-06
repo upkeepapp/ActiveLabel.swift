@@ -7,27 +7,72 @@
 //
 
 import XCTest
+@testable import ActiveLabel
 
-class ActiveLabelUnitTests: XCTestCase {
+final class ActiveLabelUnitTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testItShouldParseTextForElementsWhenTextChanges() {
+        // given
+        let mockActiveBuilder = MockActiveBuilder()
+        let label = ActiveLabel()
+        label.enabledTypes = [.mention, .hashtag, .url]
+        label.activeBuilder = mockActiveBuilder
+        // when
+        label.text = "some text"
+        // then
+        XCTAssertEqual(mockActiveBuilder.createURLElementsCallCount, 1, "it should call url elements creation only once")
+        XCTAssertEqual(mockActiveBuilder.createElementsCallCount, 2, "it should call element creation for every other type of element besides url")
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testItShouldCallElementsCreationUponTextChanges() {
+        // given
+        let mockActiveBuilder = MockActiveBuilder()
+        let label = ActiveLabel()
+        label.enabledTypes = [.mention, .hashtag, .url]
+        label.activeBuilder = mockActiveBuilder
+        // when
+        label.text = "something"
+        label.attributedText = NSAttributedString(string: "some other text")
+        label.filterMention { (string) -> Bool in return false }
+        label.filterHashtag { (string) -> Bool in return false }
+        label.awakeFromNib()
+        label.customize { (label) in }
+        // then
+        XCTAssertEqual(mockActiveBuilder.createURLElementsCallCount, 6, "it should call url elements creation only once per text change")
+        XCTAssertEqual(mockActiveBuilder.createElementsCallCount, 12, "it should call element creation for every other type of element besides url per text change")
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testItShouldNotParseTextForElementsWhenTextDoesNotChange() {
+        // given
+        let mockActiveBuilder = MockActiveBuilder()
+        let label = ActiveLabel()
+        label.enabledTypes = [.mention, .hashtag, .url]
+        label.activeBuilder = mockActiveBuilder
+        // when
+        label.mentionColor = .black
+        label.mentionSelectedColor = .black
+        label.hashtagColor = .black
+        label.hashtagSelectedColor = .black
+        label.URLColor = .black
+        label.URLSelectedColor = .black
+        label.phoneColor = .black
+        label.phoneSelectedColor = .black
+        label.addressColor = .black
+        label.addressSelectedColor = .black
+        label.dateColor = .black
+        label.dateSelectedColor = .black
+        label.customColor = [.mention : .black]
+        label.customSelectedColor = [.mention : .black]
+        label.lineSpacing = 123.123
+        label.minimumLineHeight = 123.123
+        label.highlightFontName = nil
+        label.highlightFontSize = nil
+        label.font = UIFont()
+        label.textColor = .black
+        label.textAlignment = .center
+        // then
+        XCTAssertEqual(mockActiveBuilder.createURLElementsCallCount, 0)
+        XCTAssertEqual(mockActiveBuilder.createElementsCallCount, 0)
     }
 
 }
