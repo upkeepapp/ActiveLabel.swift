@@ -20,6 +20,10 @@ final class RegexParser: RegexParserInterface {
     private let urlPattern = "(^|[\\s.:;?\\-\\]<\\(])" +
         "((https?://|www\\.|pic\\.)[-\\w;/?:@&=+$\\|\\_.!~*\\|'()\\[\\]%#,☺]+[\\w/#](\\(\\))?)" +
     "(?=$|[\\s',\\|\\(\\).:;?\\-\\[\\]>\\)])"
+    
+    /** Global cache that stores all the shared regexes across all of the ActiveLabel instances
+        we need to share them across different ActiveLabels because creating new NSRegularExpression and NSDataDetector objects is expensive and we want  to reuse them instead.
+     */
     private static var cachedRegularExpressions: [ActiveType : NSRegularExpression] = [:]
 
     func getElements(from text: String, with pattern: ActiveType, range: NSRange) -> [NSTextCheckingResult] {

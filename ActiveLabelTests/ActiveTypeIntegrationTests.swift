@@ -9,7 +9,7 @@
 import XCTest
 @testable import ActiveLabel
 
-class ActiveTypeTests: BaseTestCase {
+class ActiveTypeIntegrationTests: BaseTestCase {
 
     override func setUp() {
         super.setUp()

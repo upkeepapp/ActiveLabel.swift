@@ -185,6 +185,10 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         didSet { textContainer.lineBreakMode = lineBreakMode }
     }
     
+    /// This is exposed as an internal var so that in UTs we can swap it for another implementation mock and stub it
+    var activeBuilder: ActiveBuilderInterface = ActiveBuilder(regexParser: RegexParser())
+    
+    
     // MARK: - init functions
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -405,7 +409,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         var textRange = NSRange(location: 0, length: textLength)
         
         if enabledTypes.contains(.url) {
-            let tuple = ActiveBuilder.createURLElements(from: textString, range: textRange, maximumLength: urlMaximumLength)
+            let tuple = activeBuilder.createURLElements(from: textString, range: textRange, maximumLength: urlMaximumLength)
             let urlElements = tuple.0
             let finalText = tuple.1
             textString = finalText
@@ -421,7 +425,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             } else if type == .hashtag {
                 filter = hashtagFilterPredicate
             }
-            let hashtagElements = ActiveBuilder.createElements(type: type, from: textString, range: textRange, filterPredicate: filter)
+            let hashtagElements = activeBuilder.createElements(type: type, from: textString, range: textRange, filterPredicate: filter)
             activeElements[type] = hashtagElements
         }
         
