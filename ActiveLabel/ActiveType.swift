@@ -41,19 +41,6 @@ public enum ActiveType {
     case address
     case date
     case custom(pattern: String)
-    
-    var pattern: String {
-        switch self {
-        case .mention: return RegexParser.mentionPattern
-        case .hashtag: return RegexParser.hashtagPattern
-        case .url: return RegexParser.urlPattern
-        case .email: return RegexParser.emailPattern
-        case .phone: return RegexParser.phonePattern
-        case .address: return RegexParser.addressPattern
-        case .date: return RegexParser.datePattern
-        case .custom(let regex): return regex
-        }
-    }
 }
 
 extension ActiveType: Hashable, Equatable {
