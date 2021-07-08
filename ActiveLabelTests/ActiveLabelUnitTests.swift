@@ -14,9 +14,8 @@ final class ActiveLabelUnitTests: XCTestCase {
     func testItShouldParseTextForElementsWhenTextChanges() {
         // given
         let mockActiveBuilder = MockActiveBuilder()
-        let label = ActiveLabel()
+        let label = ActiveLabel(activeBuilder: mockActiveBuilder)
         label.enabledTypes = [.mention, .hashtag, .url]
-        label.activeBuilder = mockActiveBuilder
         // when
         label.text = "some text"
         // then
@@ -27,9 +26,8 @@ final class ActiveLabelUnitTests: XCTestCase {
     func testItShouldCallElementsCreationUponTextChanges() {
         // given
         let mockActiveBuilder = MockActiveBuilder()
-        let label = ActiveLabel()
+        let label = ActiveLabel(activeBuilder: mockActiveBuilder)
         label.enabledTypes = [.mention, .hashtag, .url]
-        label.activeBuilder = mockActiveBuilder
         // when
         label.text = "something"
         label.attributedText = NSAttributedString(string: "some other text")
@@ -45,9 +43,8 @@ final class ActiveLabelUnitTests: XCTestCase {
     func testItShouldNotParseTextForElementsWhenTextDoesNotChange() {
         // given
         let mockActiveBuilder = MockActiveBuilder()
-        let label = ActiveLabel()
+        let label = ActiveLabel(activeBuilder: mockActiveBuilder)
         label.enabledTypes = [.mention, .hashtag, .url]
-        label.activeBuilder = mockActiveBuilder
         // when
         label.mentionColor = .black
         label.mentionSelectedColor = .black

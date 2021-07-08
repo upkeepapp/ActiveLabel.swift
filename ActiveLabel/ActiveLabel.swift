@@ -185,21 +185,30 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         didSet { textContainer.lineBreakMode = lineBreakMode }
     }
     
-    /// This is exposed as an internal var so that in UTs we can swap it for another implementation mock and stub it
-    var activeBuilder: ActiveBuilderInterface = ActiveBuilder(regexParser: RegexParser())
+    private let activeBuilder: ActiveBuilderInterface
     
+    init(activeBuilder: ActiveBuilderInterface = ActiveBuilder(regexParser: RegexParser())) {
+        self.activeBuilder = activeBuilder
+        super.init(frame: .zero)
+        commonInit()
+    }
     
-    // MARK: - init functions
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
+    private func commonInit() {
         _customizing = false
         setupLabel()
     }
     
+    // MARK: - init functions
+    override public init(frame: CGRect) {
+        activeBuilder = ActiveBuilder(regexParser: RegexParser())
+        super.init(frame: frame)
+        commonInit()
+    }
+    
     required public init?(coder aDecoder: NSCoder) {
+        activeBuilder = ActiveBuilder(regexParser: RegexParser())
         super.init(coder: aDecoder)
-        _customizing = false
-        setupLabel()
+        commonInit()
     }
     
     open override func awakeFromNib() {
