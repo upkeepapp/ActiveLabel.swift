@@ -37,42 +37,37 @@ final class RegexParser: RegexParserInterface {
             return cachedRegex
         }
         
+        var regularExpression: NSRegularExpression?
+        
         switch activeType {
         case .phone:
-            let types: NSTextCheckingResult.CheckingType = [.phoneNumber]
-            guard let createdRegex = try? NSDataDetector(types: types.rawValue) else { return nil }
-            RegexParser.cachedRegularExpressions[activeType] = createdRegex
-            return createdRegex
+            regularExpression = buildDataDetector(forTypes: [.phoneNumber])
         case .address:
-            let types: NSTextCheckingResult.CheckingType = [.address]
-            guard let createdRegex = try? NSDataDetector(types: types.rawValue) else { return nil }
-            RegexParser.cachedRegularExpressions[activeType] = createdRegex
-            return createdRegex
+            regularExpression = buildDataDetector(forTypes: [.address])
         case .date:
-            let types: NSTextCheckingResult.CheckingType = [.date]
-            guard let createdRegex = try? NSDataDetector(types: types.rawValue) else { return nil }
-            RegexParser.cachedRegularExpressions[activeType] = createdRegex
-            return createdRegex
+            regularExpression = buildDataDetector(forTypes: [.date])
         case .url:
-            let createdRegex = try? NSRegularExpression(pattern: urlPattern, options: [.caseInsensitive])
-            RegexParser.cachedRegularExpressions[activeType] = createdRegex
-            return createdRegex
+            regularExpression = buildRegularExpression(forPattern: urlPattern)
         case .email:
-            let createdRegex = try? NSRegularExpression(pattern: emailPattern, options: [.caseInsensitive])
-            RegexParser.cachedRegularExpressions[activeType] = createdRegex
-            return createdRegex
+            regularExpression = buildRegularExpression(forPattern: emailPattern)
         case .mention:
-            let createdRegex = try? NSRegularExpression(pattern: mentionPattern, options: [.caseInsensitive])
-            RegexParser.cachedRegularExpressions[activeType] = createdRegex
-            return createdRegex
+            regularExpression = buildRegularExpression(forPattern: mentionPattern)
         case .hashtag:
-            let createdRegex = try? NSRegularExpression(pattern: hashtagPattern, options: [.caseInsensitive])
-            RegexParser.cachedRegularExpressions[activeType] = createdRegex
-            return createdRegex
+            regularExpression = buildRegularExpression(forPattern: hashtagPattern)
         case .custom(pattern: let pattern):
-            let createdRegex = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
-            RegexParser.cachedRegularExpressions[activeType] = createdRegex
-            return createdRegex
+            regularExpression = buildRegularExpression(forPattern: pattern)
         }
+        
+        RegexParser.cachedRegularExpressions[activeType] = regularExpression
+        
+        return regularExpression
+    }
+    
+    private func buildRegularExpression(forPattern pattern: String) -> NSRegularExpression? {
+        return try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
+    }
+    
+    private func buildDataDetector(forTypes types: NSTextCheckingResult.CheckingType) -> NSDataDetector? {
+        return try? NSDataDetector(types: types.rawValue)
     }
 }

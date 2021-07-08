@@ -10,7 +10,9 @@ import XCTest
 @testable import ActiveLabel
 
 class BaseIntegrationTestCase: XCTestCase {
-    let label = ActiveLabel()
+    
+    var label: ActiveLabel!
+    
     let customEmptyType = ActiveType.custom(pattern: "")
     
     var activeElements: [ActiveElement] {
@@ -43,6 +45,11 @@ class BaseIntegrationTestCase: XCTestCase {
         case .address: return .address
         case .date: return .date
         }
+    }
+    
+    override func setUp() {
+        super.setUp()
+        label = ActiveLabel()
     }
     
     func activeElements(perType type: ActiveElement) -> [ActiveElement] {
